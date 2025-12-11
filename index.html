@@ -4479,16 +4479,11 @@
             e.stopPropagation();
             if (e.touches.length > 0) {
                 const touch = e.touches[0];
-                const rect = canvas.getBoundingClientRect();
-                const scaleX = canvas.width / rect.width;
-                const scaleY = canvas.height / rect.height;
-                const x = (touch.clientX - rect.left) * scaleX;
-                const y = (touch.clientY - rect.top) * scaleY;
                 
-                // Directly call startDrawing with touch coordinates
+                // Create fake event with clientX/clientY that startDrawing expects
                 const fakeEvent = { 
-                    offsetX: x, 
-                    offsetY: y,
+                    clientX: touch.clientX,
+                    clientY: touch.clientY,
                     preventDefault: function() {}
                 };
                 startDrawing(fakeEvent);
@@ -4501,16 +4496,11 @@
             e.stopPropagation();
             if (e.touches.length > 0) {
                 const touch = e.touches[0];
-                const rect = canvas.getBoundingClientRect();
-                const scaleX = canvas.width / rect.width;
-                const scaleY = canvas.height / rect.height;
-                const x = (touch.clientX - rect.left) * scaleX;
-                const y = (touch.clientY - rect.top) * scaleY;
                 
-                // Directly call draw with touch coordinates
+                // Create fake event with clientX/clientY that draw expects
                 const fakeEvent = { 
-                    offsetX: x, 
-                    offsetY: y,
+                    clientX: touch.clientX,
+                    clientY: touch.clientY,
                     preventDefault: function() {}
                 };
                 draw(fakeEvent);
